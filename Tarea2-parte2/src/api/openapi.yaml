@@ -1,0 +1,353 @@
+openapi: 3.0.0
+info:
+  title: Books API
+  description: This web service offers information on books
+  version: 0.1.9
+servers:
+- url: http://webservice_booksapps.netlify.org
+  description: web service published on netlify
+paths:
+  /books/{bookId}:
+    get:
+      summary: Returns a book by ID.
+      operationId: booksBookIdGET
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+      x-swagger-router-controller: Default
+    put:
+      summary: Update book information
+      operationId: booksBookIdPUT
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      requestBody:
+        description: Book data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete a book by ID.
+      operationId: booksBookIdDELETE
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: OK
+        '204':
+          description: book eliminado exitosamente
+        '404':
+          description: book no encontrado
+      x-swagger-router-controller: Default
+  /books/:
+    post:
+      summary: Create a new book
+      operationId: booksPOST
+      requestBody:
+        description: Book data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    get:
+      summary: Returns a books.
+      operationId: booksGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+      x-swagger-router-controller: Default
+
+  /author/{authorId}:
+    get:
+      summary: Returns a author by ID.
+      operationId: authorsAuthorIdGET
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+      x-swagger-router-controller: Default
+    put:
+      summary: Update author information
+      operationId: authorsAuthorIdPUT
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Author data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete a author by ID.
+      operationId: authorsAuthorIdDELETE
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: OK
+        '204':
+          description: Autor eliminado exitosamente
+        '404':
+          description: Autor no encontrado
+      x-swagger-router-controller: Default
+  /authors/:
+    post:
+      summary: Create a new author
+      operationId: authorsPOST
+      requestBody:
+        description: Author data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    get:
+      summary: Returns a authors.
+      operationId: authorsGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+      x-swagger-router-controller: Default
+  
+  /publisher/{publisherId}:
+    get:
+      summary: Returns a publisher by ID.
+      operationId: publishersPublisherIdGET
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+      x-swagger-router-controller: Default
+    put:
+      summary: Update publisher information
+      operationId: publishersPublisherIdPUT
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      requestBody:
+        description: Publisher data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete a publisher by ID.
+      operationId: publishersPublisherIdDELETE
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+  /publishers/:
+    post:
+      summary: Create a new publisher
+      operationId: publishersPOST
+      requestBody:
+        description: Publisher data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    get:
+      summary: Returns a publishers.
+      operationId: publishersGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        bookId:
+          type: number
+        title:
+          type: string
+        edition:
+          type: string
+        copyright:
+          type: number
+        language:
+          type: string
+        pages:
+          type: number
+        author:
+          type: string
+        publisher:
+          type: string
+      example:
+        copyright: "2015"
+        pages: "1054"
+        author: Silbertzhz
+        edition: 4th
+        publisher: Mc Graw Hill
+        language: ENGLISH
+        title: Database System
+        bookId: book01
+    Author:
+      type: object
+      properties:
+        authorId:
+          type: number
+        author:
+          type: string
+        nationality:
+          type: string
+        birth_year:
+          type: number
+        fields:
+          type: string
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+      example:
+        authorId: 1
+        author: "Juan"
+        nationality: Costarricense
+        birth_year: 3
+        fields: ENGLISH
+        books: {
+          book_id: 1,
+          tittle: nuevo libro
+        }
+    Publisher:
+      type: object
+      properties:
+        publisherId:
+          type: number
+        publisher:
+          type: string
+        country:
+          type: string
+        founded:
+          type: number
+        genere:
+          type: string
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+      example:
+        publisherId: 1
+        publisher: "John Wiley & Sons"
+        country: United States
+        founded: 1807
+        genere: Academic
+        books: {
+          book_id: 1,
+          tittle: nuevo libro
+        }
+        
